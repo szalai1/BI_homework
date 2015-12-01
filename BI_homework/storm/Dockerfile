@@ -12,6 +12,4 @@ RUN wget http://xenia.sote.hu/ftp/mirrors/www.apache.org/storm/apache-storm-0.10
     mkdir /mnt/storm
 COPY storm.yaml apache-storm-0.10.0/conf/storm.yaml
 
-
-EXPOSE 8080
-ENTRYPOINT apache-storm-0.10.0/bin/storm ui
+ENTRYPOINT ["apache-storm-0.10.0/bin/storm"]

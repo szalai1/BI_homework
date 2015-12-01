@@ -1,0 +1,27 @@
+zookeeper:
+  image: szalai1/zookeeper
+
+nimbus:
+  image: szalai1/storm
+  command: nimbus
+  links:
+    - zookeeper:zookeeper
+
+supervisor:
+  image: szalai1/storm
+  command: supervisor
+  links:
+    - nimbus:nimbus
+    - zookeeper:zookeeper
+    
+ui:
+  image: szalai1/storm
+  command: ui
+  links:
+    - nimbus:nimbus
+    - zookeeper:zookeeper
+  expose:
+    - "8080"
+  ports:
+    - "8080:8080"
+  

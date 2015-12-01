@@ -1,8 +1,11 @@
 storm.zookeeper.servers:
     - "zookeeper"
+    
 storm.local.dir: "/mnt/storm"
+
 nimbus.host:
-    "master"
+    "nimbus"
+    
 supervisor.slots.ports:
     - 6700
     - 6701
