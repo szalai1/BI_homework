@@ -1,1 +1,5 @@
-# BI_homework
+# bi homework
+
+dependency:
+	* docker
+	* docker-compose
