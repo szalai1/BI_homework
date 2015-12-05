@@ -47,6 +47,7 @@ public class WordCounterBolt implements IRichBolt{
             out = new BufferedWriter(fstream);
             for(Map.Entry<String, Integer> entry:counters.entrySet()){
                 out.write(entry.getKey()+" : " + entry.getValue()+"\n");
+                System.out.println(">>>>> >>> >> > > >  :   " + entry.getKey()+" : " + entry.getValue()+"\n");
             }
         } catch (IOException e) {
             e.printStackTrace();
