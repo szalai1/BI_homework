@@ -40,10 +40,11 @@ public class WordCounterBolt implements IRichBolt{
 
 	@Override
 	public void cleanup() {
-		System.out.println(" -- Word Counter ["+ name + "-"+id +"]");
-		for(Map.Entry<String, Integer> entry:counters.entrySet()){
-			System.out.println(entry.getKey()+" : " + entry.getValue());
-		}
+      FileWriter fstream = new FileWriter("out.txt", true); //true tells to append data.
+      out = new BufferedWriter(fstream);
+      for(Map.Entry<String, Integer> entry:counters.entrySet()){
+          out.write(entry.getKey()+" : " + entry.getValue()+"\n");
+      }
 	}
 
 	@Override
