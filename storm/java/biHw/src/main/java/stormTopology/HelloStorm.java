@@ -1,8 +1,8 @@
 package stormTopology.storm;
 
-import com.spnotes.storm.bolts.WordCounterBolt;
-import com.spnotes.storm.bolts.WordSpitterBolt;
-import com.spnotes.storm.spouts.LineReaderSpout;
+import stormTopology.bolts.WordCounterBolt;
+import stormTopology.bolts.WordSpitterBolt;
+import stormTopology.spouts.LineReaderSpout;
 
 import backtype.storm.Config;
 import backtype.storm.LocalCluster;
