@@ -40,6 +40,7 @@ public class WordCounterBolt implements IRichBolt{
 
 	@Override
 	public void cleanup() {
+      BufferedWriter out = null;
       FileWriter fstream = new FileWriter("out.txt", true); //true tells to append data.
       out = new BufferedWriter(fstream);
       for(Map.Entry<String, Integer> entry:counters.entrySet()){
