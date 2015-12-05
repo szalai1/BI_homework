@@ -50,10 +50,6 @@ public class WordCounterBolt implements IRichBolt{
             }
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            if (pw != null) {
-                pw.close();
-            }
         }
     }
 
