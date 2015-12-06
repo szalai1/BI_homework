@@ -5,9 +5,8 @@ import stormTopology.bolts.WordSpitterBolt;
 import stormTopology.spouts.LineReaderSpout;
 
 import backtype.storm.Config;
-import backtype.storm.LocalCluster;
 import backtype.storm.topology.TopologyBuilder;
-
+import backtype.storm.StormSubmitter;
 
 public class HelloStorm {
 
@@ -21,12 +20,10 @@ public class HelloStorm {
 		builder.setSpout("line-reader-spout", new LineReaderSpout());
 		builder.setBolt("word-spitter", new WordSpitterBolt()).shuffleGrouping("line-reader-spout");
 		builder.setBolt("word-counter", new WordCounterBolt()).shuffleGrouping("word-spitter");
-		
-		LocalCluster cluster = new LocalCluster();
-		cluster.submitTopology("HelloStorm", config, builder.createTopology());
-		Thread.sleep(10000);
-		
-		cluster.shutdown();
+
+    config.setNumWorkers(3);
+    config.setMaxSpoutPending(5000);
+    StormSubmitter.submitTopology("mytopology", config, builder.createTopology());
 	}
 
 }
