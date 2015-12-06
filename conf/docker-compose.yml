@@ -2,20 +2,20 @@ zookeeper:
   image: szalai1/zookeeper
 
 nimbus:
-  image: szalai1/storm
+  image: szalai1/storm:0.1
   command: nimbus
   links:
     - zookeeper:zookeeper
 
 supervisor:
-  image: szalai1/storm
+  image: szalai1/storm:0.1
   command: supervisor
   links:
     - nimbus:nimbus
     - zookeeper:zookeeper
     
 ui:
-  image: szalai1/storm
+  image: szalai1/storm:0.1
   command: ui
   links:
     - nimbus:nimbus
