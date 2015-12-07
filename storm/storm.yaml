@@ -9,6 +9,7 @@ nimbus.host:
 supervisor.slots.ports:
     - 6700
     - 6701
+    - 6702
 
 
 nimbus.thrift.max_buffer_size: 20480000

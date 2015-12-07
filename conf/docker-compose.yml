@@ -2,20 +2,25 @@ zookeeper:
   image: szalai1/zookeeper
 
 nimbus:
-  image: szalai1/storm:0.1
+  image: szalai1/storm:0.2
   command: nimbus
+  hostname: nimbus
   links:
     - zookeeper:zookeeper
+    - mongodb:mongodb
+  volumes:
+    - ../../bi_homework:/git
 
 supervisor:
-  image: szalai1/storm:0.1
+  image: szalai1/storm:0.2
   command: supervisor
   links:
     - nimbus:nimbus
     - zookeeper:zookeeper
+    - mongodb:mongodb
     
 ui:
-  image: szalai1/storm:0.1
+  image: szalai1/storm:0.2
   command: ui
   links:
     - nimbus:nimbus
@@ -24,4 +29,11 @@ ui:
     - "8080"
   ports:
     - "8080:8080"
+  
+mongodb:
+  image: mongo
+  expose :
+    - "27017"
+  ports:
+    - "27017:27017"
   
