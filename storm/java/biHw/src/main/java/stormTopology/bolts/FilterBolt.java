@@ -41,7 +41,7 @@ public class FilterBolt implements IRichBolt{
     public void execute(Tuple input) {
         try {
             Document doc = Document.parse(input.getString(0));
-            if (! doc.get("score").toString().equals("N/A")) {
+            if ((!doc.get("score").toString().equals("N/A"))) {
                 this.coll.insertOne(doc.append("score", Double.parseDouble(doc.get("score").toString())));
             }
         } catch (NullPointerException e) {

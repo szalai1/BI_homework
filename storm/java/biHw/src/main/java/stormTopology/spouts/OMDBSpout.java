@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.util.Map;
 import java.net.*;
 import java.io.*;
+import java.util.Random;
+
 import backtype.storm.spout.SpoutOutputCollector;
 import backtype.storm.task.TopologyContext;
 import backtype.storm.topology.IRichSpout;
@@ -21,8 +23,7 @@ public class OMDBSpout implements IRichSpout {
     private FileReader fileReader;
     private boolean completed = false;
     private TopologyContext context;
-    private int counter = 100000;
-
+    private Random rand;
     
     private String getOMDB(int num) {
         String Num = String.format("%07d",num);
@@ -50,8 +51,7 @@ public class OMDBSpout implements IRichSpout {
                 // nothing to see here
             }
         }
-        this.counter+=1;
-        return getOMDB(this.counter);
+        return getOMDB(100000 + rand.nextInt(2000000));
     }
 
     @Override
@@ -59,13 +59,13 @@ public class OMDBSpout implements IRichSpout {
                      SpoutOutputCollector collector) {
         this.context = context;
         this.collector = collector;
+        this.rand =  new Random(42); 
     }
     
     @Override
     public void nextTuple() {
         try {
-            this.collector.emit(new Values(getOMDB(this.counter)), "film");
-            this.counter += 1;
+            this.collector.emit(new Values(getOMDB(100000 + rand.nextInt(2000000))), "film");
         } catch (NullPointerException e) {
         }
     }

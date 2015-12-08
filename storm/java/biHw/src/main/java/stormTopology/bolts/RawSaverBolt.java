@@ -32,13 +32,17 @@ public class RawSaverBolt implements IRichBolt{
 
 	@Override
 	public void execute(Tuple input) {
-      String str = input.getString(0);
-      Document doc = Document.parse(str);
-      this.coll.insertOne( doc);
-      Document doc2 = new Document();
-      doc2.append("year", doc.get("Year").toString()).append("title", doc.get("Title").toString());
-      doc2.append("score", doc.get("imdbRating").toString());
-      collector.emit(new Values(doc2.toJson()));
+      try {
+          String str = input.getString(0);
+          Document doc = Document.parse(str);
+          this.coll.insertOne( doc);
+          Document doc2 = new Document();
+          doc2.append("year", doc.get("Year").toString()).append("title", doc.get("Title").toString());
+          doc2.append("score", doc.get("imdbRating").toString());
+          collector.emit(new Values(doc2.toJson()));
+      } catch (NullPointerException e) {
+
+      }
 	}
 
 	@Override
