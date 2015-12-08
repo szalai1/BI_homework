@@ -31,7 +31,7 @@ public class OMDBSpout implements IRichSpout {
         BufferedReader br;
         String line;
         try {
-            TimeUnit.SECONDS.sleep(1);
+            TimeUnit.MILLISECONDS.sleep(250);
         } catch (InterruptedException e) {
         }
         try {
@@ -59,7 +59,7 @@ public class OMDBSpout implements IRichSpout {
                      SpoutOutputCollector collector) {
         this.context = context;
         this.collector = collector;
-        this.rand =  new Random(42); 
+        this.rand =  new Random(43); 
     }
     
     @Override

@@ -29,7 +29,17 @@ ui:
     - "8080"
   ports:
     - "8080:8080"
-  
+
+web:
+  image: szalai1/web:latest
+  links:
+    - mongodb:mongodb
+  expose:
+    - "9090"
+  ports:
+    - "9090:9090"
+    
+    
 mongodb:
   image: mongo
   expose :
